@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="language" content="en">
+	<meta name="language" content="pt-br">
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection">
@@ -30,8 +30,9 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				//array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Usuarios', 'url'=>array('/usuarios/index'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Tarefas', 'url'=>array('/tarefas/index'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Tipos de Tarefas', 'url'=>array('/tipoTarefa/index'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
@@ -55,5 +56,6 @@
 
 </div><!-- page -->
 
+		<script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/jQuery-Mask/jquery.mask.min.js"></script>
 </body>
 </html>

@@ -12,7 +12,23 @@ $this->pageTitle=Yii::app()->name;
 
 <section>
 
-	<h4>Efetue o Login para acessar o sistema!</h4>
+	<?php
+			if(!Yii::app()->user->isGuest) {
+
+				if(Yii::app()->user->name == 'admin') {
+					
+					echo "Conteudo do ADM.";
+				} else {
+
+					echo "Conteudo do Usuario.";
+				}
+
+			} else {
+
+				echo "<h4>Efetue o Login para acessar o sistema!</h4>";
+			}
+	?>
+
 
 </section>
 

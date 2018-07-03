@@ -17,8 +17,8 @@ class TipoTarefaController extends GxController {
 			
 			$model->setAttributes($_POST['TipoTarefa']);
 
-			$model["Data_Modificacao"] = date("Y-m-d h:i:s");
-			$model["Data_Criacao"] = date("Y-m-d h:i:s");			 									
+			$model->Data_Criacao = date("Y-m-d h:i:s");
+			$model->Data_Modificacao = date("Y-m-d h:i:s");			 									
 
 			//var_dump($model);
 
@@ -36,7 +36,7 @@ class TipoTarefaController extends GxController {
 	public function actionUpdate($id) {
 		$model = $this->loadModel($id, 'TipoTarefa');
 
-		$model["Data_Modificacao"] = date("Y-m-d h:i:s");
+		$model->Data_Modificacao = date("Y-m-d h:i:s");
 
 		if (isset($_POST['TipoTarefa'])) {
 			$model->setAttributes($_POST['TipoTarefa']);

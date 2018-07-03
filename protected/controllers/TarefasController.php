@@ -16,8 +16,8 @@ class TarefasController extends GxController {
 		if (isset($_POST['Tarefas'])) {
 			$model->setAttributes($_POST['Tarefas']);
 
-			$model["Data_Modificacao"] = date("Y-m-d h:i:s");
-			$model["Data_Criacao"] = date("Y-m-d h:i:s");	
+			$model->Data_Criacao = date("Y-m-d h:i:s");
+			$model->Data_Modificacao = date("Y-m-d h:i:s");	
 
 			if ($model->save()) {
 				if (Yii::app()->getRequest()->getIsAjaxRequest())
@@ -37,15 +37,15 @@ class TarefasController extends GxController {
 		if (isset($_POST['Tarefas'])) {
 			$model->setAttributes($_POST['Tarefas']);
 
-			if($model["Status"] == "Concluida") {
+			if($model->Status == "Concluida") {
 
-				$model["Data_Conclusao"] = date("Y-m-d h:i:s");
+				$model->Data_Conclusao = date("Y-m-d h:i:s");
 			} else {
 
-				$model["Data_Conclusao"] = null;
+				$model->Data_Conclusao = null;
 			}
 
-			$model["Data_Modificacao"] = date("Y-m-d h:i:s");
+			$model->Data_Modificacao = date("Y-m-d h:i:s");
 
 			if ($model->save()) {
 				$this->redirect(array('view', 'id' => $model->ID_Tarefa));
