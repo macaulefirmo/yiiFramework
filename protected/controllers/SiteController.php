@@ -93,7 +93,17 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()) {
 								
-				$this->redirect(Yii::app()->user->returnUrl);
+				if($model->username == 'admin') {
+
+					$this->redirect(Yii::app()->user->returnUrl);
+				} else {
+					$this->redirect('index.php?r=site/page&view=userHome');
+					/*$dataProvider = new CActiveDataProvider('Tarefas');
+					render('index.php?r=site/page&view=userHome', array(
+						'dataProvider' => $dataProvider,
+					));*/
+				}
+				
 			}
 		}
 		// display the login form
@@ -108,4 +118,12 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+	public function actionUserHome() {
+		$dataProvider = new CActiveDataProvider('Tarefas');
+		$this->render('page&view=userHome', array(
+			'dataProvider' => $dataProvider,
+		));
+	}
+
 }
