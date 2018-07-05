@@ -46,7 +46,7 @@ class TipoTarefaController extends GxController {
 			));		
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
@@ -74,7 +74,7 @@ class TipoTarefaController extends GxController {
 			$this->render('create', array( 'model' => $model));	
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
@@ -99,7 +99,7 @@ class TipoTarefaController extends GxController {
 			));	
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
@@ -116,7 +116,7 @@ class TipoTarefaController extends GxController {
 				throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
@@ -130,7 +130,7 @@ class TipoTarefaController extends GxController {
 			));
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
@@ -149,7 +149,7 @@ class TipoTarefaController extends GxController {
 			));
 		} else {
 			
-			$this->redirect(array('usuarios/userHome'));
+			$this->redirect(array('tarefas/userHome'));
 		}	
 	}
 
