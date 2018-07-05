@@ -51,7 +51,10 @@
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 					array('label'=>'Home', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->isGuest),
-					array('label'=>'Home', 'url'=>array('/site/page', 'view' => 'userHome'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Home', 'url'=>array('/tarefas/userHome'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Perfil', 'url'=>array('/usuarios/perfil'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Minhas Tarefas', 'url'=>array('/tarefas/userTarefas'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Tarefas Públicas', 'url'=>array('/tarefas/tarefasPublicas'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 					array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 				),

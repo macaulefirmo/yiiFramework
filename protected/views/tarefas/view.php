@@ -19,24 +19,24 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
 	'attributes' => array(
-'ID_Tarefa',
-'Titulo',
-array(
-			'name' => 'idUsuario0',
-			'type' => 'raw',
-			'value' => $model->idUsuario0 !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->idUsuario0)), array('usuarios/view', 'id' => GxActiveRecord::extractPkValue($model->idUsuario0, true))) : null,
-			),
-'Privacidade',
-'Descricao',
-array(
-			'name' => 'idTipo0',
-			'type' => 'raw',
-			'value' => $model->idTipo0 !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->idTipo0)), array('tipoTarefa/view', 'id' => GxActiveRecord::extractPkValue($model->idTipo0, true))) : null,
-			),
-'Status',
-'Data_Conclusao',
-'Data_Criacao',
-'Data_Modificacao',
+	'ID_Tarefa',
+	'Titulo',
+	array(
+		'name' => 'idUsuario0',
+		'type' => 'raw',
+		'value' => $model->idUsuario0 !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->idUsuario0)), array('usuarios/view', 'id' => GxActiveRecord::extractPkValue($model->idUsuario0, true))) : null,
+		),
+		'Privacidade',
+		'Descricao',
+		array(
+					'name' => 'idTipo0',
+					'type' => 'raw',
+					'value' => $model->idTipo0 !== null ? GxHtml::link(GxHtml::encode(GxHtml::valueEx($model->idTipo0)), array('tipoTarefa/view', 'id' => GxActiveRecord::extractPkValue($model->idTipo0, true))) : null,
+					),
+		'Status',
+		'Data_Conclusao',
+		'Data_Criacao',
+		'Data_Modificacao',
 	),
 )); ?>
 

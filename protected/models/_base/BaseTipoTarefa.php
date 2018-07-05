@@ -36,10 +36,10 @@ abstract class BaseTipoTarefa extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('Nome, Data_Criacao', 'required'),
+			array('Nome', 'required'),
 			array('Nome', 'length', 'max'=>150),
-			array('Data_Modificacao', 'safe'),
-			array('Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('Data_Criacao, Data_Modificacao', 'safe'),
+			array('Data_Criacao, Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('ID_Tipo_Tarefa, Nome, Data_Criacao, Data_Modificacao', 'safe', 'on'=>'search'),
 		);
 	}

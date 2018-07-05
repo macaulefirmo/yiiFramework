@@ -2,34 +2,94 @@
 
 class UsuariosController extends GxController {
 
+	public function filters() {
+		
+		return array(
+            'accessControl',
+        );
+	}
+	
+	public function accessRules() {
+		
+		return array(
+			array('allow',
+                'actions' => array(
+					'create', 
+					'update', 
+					'delete',
+					'admin',
+					'index',
+					'view',
+				),
+                'roles' => array('admin'),
+			),	
+			array('allow',
+                'actions' => array(
+					'update', 
+					'view',
+					'perfil'
+				),
+                'users' => array('@'),
+			),		
+			array('deny',
+                'actions' => array(
+					'create', 
+					'update', 
+					'delete',
+					'admin',
+					'index',
+					'view',	
+					'perfil'				
+				),
+                'users' => array('?'),
+            ), 
+        );
+    }
 
 	public function actionView($id) {
-		$this->render('view', array(
-			'model' => $this->loadModel($id, 'Usuarios'),
-		));
+
+		if(Yii::app()->user->name == 'admin') {
+
+			$this->render('view', array(
+				'model' => $this->loadModel($id, 'Usuarios'),
+			));
+		} else {
+
+			$this->render('viewUser', array(
+				'model' => $this->loadModel($id, 'Usuarios'),
+			));
+		}		
 	}
 
 	public function actionCreate() {
-		$model = new Usuarios;
+		
+		if(Yii::app()->user->name == 'admin') {
 
-		if (isset($_POST['Usuarios'])) {
-			$model->setAttributes($_POST['Usuarios']);
+			$model = new Usuarios;
 
-			$model->Data_Criacao = date("Y-m-d h:i:s");
-			$model->Data_Modificacao = date("Y-m-d h:i:s");
+			if(isset($_POST['Usuarios'])) {
+				$model->setAttributes($_POST['Usuarios']);
 
-			if ($model->save()) {
-				if (Yii::app()->getRequest()->getIsAjaxRequest())
-					Yii::app()->end();
-				else
-					$this->redirect(array('view', 'id' => $model->ID_Usuario));
+				$model->Data_Criacao = date("Y-m-d h:i:s");
+				$model->Data_Modificacao = date("Y-m-d h:i:s");
+
+				if ($model->save()) {
+					if (Yii::app()->getRequest()->getIsAjaxRequest())
+						Yii::app()->end();
+					else
+						$this->redirect(array('view', 'id' => $model->ID_Usuario));
+				}
 			}
-		}
 
-		$this->render('create', array( 'model' => $model));
+			$this->render('create', array( 'model' => $model));	
+		} else {
+
+			$this->redirect(array('usuarios/userHome'));
+		}		
 	}
 
 	public function actionUpdate($id) {
+		
 		$model = $this->loadModel($id, 'Usuarios');
 
 		$model->Data_Modificacao = date("Y-m-d h:i:s");
@@ -42,38 +102,95 @@ class UsuariosController extends GxController {
 			}
 		}
 
-		$this->render('update', array(
+		if(Yii::app()->user->name == 'admin') {
+			
+			$this->render('update', array(
 				'model' => $model,
-				));
+			));
+		} else {
+
+			$this->render('perfil', array(
+				'model' => $model,
+			));	
+		}
 	}
 
 	public function actionDelete($id) {
-		if (Yii::app()->getRequest()->getIsPostRequest()) {
-			$this->loadModel($id, 'Usuarios')->delete();
 
-			if (!Yii::app()->getRequest()->getIsAjaxRequest())
-				$this->redirect(array('admin'));
-		} else
-			throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));
+		if(Yii::app()->user->name == 'admin') {
+
+			if (Yii::app()->getRequest()->getIsPostRequest()) {
+				$this->loadModel($id, 'Usuarios')->delete();
+	
+				if (!Yii::app()->getRequest()->getIsAjaxRequest())
+					$this->redirect(array('admin'));
+			} else
+				throw new CHttpException(400, Yii::t('app', 'Your request is invalid.'));		
+		} else {
+
+			$this->redirect(array('usuarios/userHome'));
+		}	
 	}
 
 	public function actionIndex() {
-		$dataProvider = new CActiveDataProvider('Usuarios');
-		$this->render('index', array(
-			'dataProvider' => $dataProvider,
-		));
+
+		if(Yii::app()->user->name == 'admin') {
+			
+			$dataProvider = new CActiveDataProvider('Usuarios');
+			$this->render('index', array(
+				'dataProvider' => $dataProvider,
+			));	
+		} else {
+
+			$this->redirect(array('usuarios/userHome'));
+		}		
 	}
 
-	public function actionAdmin() {
-		$model = new Usuarios('search');
-		$model->unsetAttributes();
+	public function actionAdmin() {			
 
-		if (isset($_GET['Usuarios']))
-			$model->setAttributes($_GET['Usuarios']);
+		if(Yii::app()->user->name == 'admin') {
 
-		$this->render('admin', array(
+			$model = new Usuarios('search');
+			$model->unsetAttributes();
+
+			if (isset($_GET['Usuarios']))
+				$model->setAttributes($_GET['Usuarios']);
+
+			$this->render('admin', array(
+				'model' => $model,
+			));				
+		} else {
+
+			$this->redirect(array('usuarios/userHome'));
+		}
+	}
+
+	public function actionPerfil() {
+				
+		$criteria2 = new CDbCriteria;
+		$criteria2->select = 'ID_Usuario';
+		$criteria2->condition = 'Login=:login';
+		$criteria2->params = array(':login' => Yii::app()->user->name);
+
+		$model = new Usuarios();
+		$usuario = $model->find($criteria2);
+
+		$model = $this->loadModel($usuario->ID_Usuario, 'Usuarios');		
+
+		if (isset($_POST['Usuarios'])) {
+			
+			$model->setAttributes($_POST['Usuarios']);
+
+			$model->Data_Modificacao = date("Y-m-d h:i:s");
+
+			if ($model->save()) {
+				
+				$this->redirect(array('view', 'id' => $model->ID_Usuario));
+			}
+		}
+
+		$this->render('perfil', array(
 			'model' => $model,
-		));
+		));		
 	}
-
 }

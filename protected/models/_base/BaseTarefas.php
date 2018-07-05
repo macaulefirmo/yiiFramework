@@ -43,13 +43,13 @@ abstract class BaseTarefas extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('Titulo, idUsuario, Privacidade, Descricao, idTipo, Status', 'required'),
+			array('Titulo, Privacidade, Descricao, idTipo, Status', 'required'),
 			array('Titulo', 'length', 'max'=>150),
 			array('idUsuario, idTipo', 'length', 'max'=>10),
 			array('Privacidade', 'length', 'max'=>7),
 			array('Status', 'length', 'max'=>9),
 			array('Data_Conclusao, Data_Criacao, Data_Modificacao', 'safe'),
-			array('Data_Conclusao, Data_Criacao, Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('idUsuario, Data_Conclusao, Data_Criacao, Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('ID_Tarefa, Titulo, idUsuario, Privacidade, Descricao, idTipo, Status, Data_Conclusao, Data_Criacao, Data_Modificacao', 'safe', 'on'=>'search'),
 		);
 	}
@@ -90,6 +90,80 @@ abstract class BaseTarefas extends GxActiveRecord {
 		$criteria->compare('Titulo', $this->Titulo, true);
 		$criteria->compare('idUsuario', $this->idUsuario);
 		$criteria->compare('Privacidade', $this->Privacidade, true);
+		$criteria->compare('Descricao', $this->Descricao, true);
+		$criteria->compare('idTipo', $this->idTipo);
+		$criteria->compare('Status', $this->Status, true);
+		$criteria->compare('Data_Conclusao', $this->Data_Conclusao, true);
+		$criteria->compare('Data_Criacao', $this->Data_Criacao, true);
+		$criteria->compare('Data_Modificacao', $this->Data_Modificacao, true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria' => $criteria,
+		));
+	}
+
+	public function getTarefasPendentes() {
+
+		$criteria2 = new CDbCriteria;
+		$criteria2->select = 'ID_Usuario';
+		$criteria2->condition = 'Login=:login';
+		$criteria2->params = array(':login' => Yii::app()->user->name);
+
+		$model = new Usuarios();
+		$usuario = $model->find($criteria2);
+
+		$criteria = new CDbCriteria;
+		$criteria->compare('ID_Tarefa', $this->ID_Tarefa, true);
+		$criteria->compare('Titulo', $this->Titulo, true);
+		$criteria->compare('idUsuario', $usuario->ID_Usuario);
+		$criteria->compare('Privacidade', $this->Privacidade, true);
+		$criteria->compare('Descricao', $this->Descricao, true);
+		$criteria->compare('idTipo', $this->idTipo);
+		$criteria->compare('Status','Pendente', true);
+		$criteria->compare('Data_Conclusao', $this->Data_Conclusao, true);
+		$criteria->compare('Data_Criacao', $this->Data_Criacao, true);
+		$criteria->compare('Data_Modificacao', $this->Data_Modificacao, true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria' => $criteria,
+		));		
+	}
+
+	public function getTarefasUser() {
+	
+		$criteria2 = new CDbCriteria;
+		$criteria2->select = 'ID_Usuario';
+		$criteria2->condition = 'Login=:login';
+		$criteria2->params = array(':login' => Yii::app()->user->name);
+
+		$model = new Usuarios();
+		$usuario = $model->find($criteria2);
+
+		$criteria = new CDbCriteria;
+		$criteria->compare('ID_Tarefa', $this->ID_Tarefa, true);
+		$criteria->compare('Titulo', $this->Titulo, true);
+		$criteria->compare('idUsuario', $usuario->ID_Usuario);
+		$criteria->compare('Privacidade', $this->Privacidade, true);
+		$criteria->compare('Descricao', $this->Descricao, true);
+		$criteria->compare('idTipo', $this->idTipo);
+		$criteria->compare('Status',$this->Status, true);
+		$criteria->compare('Data_Conclusao', $this->Data_Conclusao, true);
+		$criteria->compare('Data_Criacao', $this->Data_Criacao, true);
+		$criteria->compare('Data_Modificacao', $this->Data_Modificacao, true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria' => $criteria,
+		));	
+	}
+
+	public function getTarefasPublicas() {
+
+		$criteria = new CDbCriteria;
+
+		$criteria->compare('ID_Tarefa', $this->ID_Tarefa, true);
+		$criteria->compare('Titulo', $this->Titulo, true);
+		$criteria->compare('idUsuario', $this->idUsuario);
+		$criteria->compare('Privacidade', 'Publica', true);
 		$criteria->compare('Descricao', $this->Descricao, true);
 		$criteria->compare('idTipo', $this->idTipo);
 		$criteria->compare('Status', $this->Status, true);

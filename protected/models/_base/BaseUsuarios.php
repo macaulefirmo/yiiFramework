@@ -42,14 +42,14 @@ abstract class BaseUsuarios extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('Nome, Sexo, Data_Nascimento, Email, Telefone, Login, Senha, Data_Criacao', 'required'),
+			array('Nome, Sexo, Data_Nascimento, Email, Telefone, Login, Senha', 'required'),
 			array('Nome, Login', 'length', 'max'=>150),
 			array('Sexo', 'length', 'max'=>9),
 			array('Email', 'length', 'max'=>250),
 			array('Telefone', 'length', 'max'=>20),
 			array('Senha', 'length', 'max'=>100),
-			array('Data_Modificacao', 'safe'),
-			array('Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('Data_Criacao, Data_Modificacao', 'safe'),
+			array('Data_Criacao, Data_Modificacao', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('ID_Usuario, Nome, Sexo, Data_Nascimento, Email, Telefone, Login, Senha, Data_Criacao, Data_Modificacao', 'safe', 'on'=>'search'),
 		);
 	}
@@ -98,5 +98,18 @@ abstract class BaseUsuarios extends GxActiveRecord {
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}
+
+	public function getIdUser() {
+		
+		$criteria = new CDbCriteria;
+		$criteria->select = 'ID_Usuario';
+		$criteria->condition = 'Login=:login';
+		$criteria->params = array(':login' => Yii::app()->user->name);
+
+		$model = new Usuarios();
+		$usuario = $model->find($criteria);
+
+		return $usuario->ID_Usuario;
 	}
 }
