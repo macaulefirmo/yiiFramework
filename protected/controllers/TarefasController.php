@@ -139,11 +139,7 @@ class TarefasController extends GxController {
 		if($model->Privacidade == 'Publica') {
 
 			$model->idUsuario = null;
-		} else {
-
-			$usuario = new Usuarios();
-			$model->idUsuario = $usuario->getIdUser();
-		}
+		} 
 
 		$model->Data_Modificacao = date("Y-m-d h:i:s");
 
