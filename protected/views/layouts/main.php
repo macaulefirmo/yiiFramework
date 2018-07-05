@@ -14,7 +14,7 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
-
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/teste.css">
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -83,7 +83,6 @@
 	</div><!-- footer -->
 
 </div><!-- page -->
-
-		<script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/jQuery-Mask/jquery.mask.min.js"></script>
+		
 </body>
 </html>

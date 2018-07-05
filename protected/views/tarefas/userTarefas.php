@@ -2,7 +2,7 @@
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(	
 	'dataProvider' => $dataProvider,
-	//'filter' => $model,
+	// 'filter' => $dataProvider->model,
 	'columns' => array(
         array(
             'header' => 'ID',
@@ -39,3 +39,9 @@
 		),
 	),
 )); ?>
+
+<?php
+
+    // Yii::app()->clientScript->registerScriptFile();
+
+?>

@@ -36,35 +36,59 @@
 				'dateFormat' => 'yy-mm-dd',
 				),
 			));
-; ?>
+		; 
+		?>
 		<?php echo $form->error($model,'Data_Nascimento'); ?>
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Email'); ?>
-		<?php echo $form->textField($model, 'Email', array('maxlength' => 250)); ?>
+		<?php echo $form->textField($model, 'Email', array(
+			'maxlength' => 250,
+			'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+			)); ?>
 		<?php echo $form->error($model,'Email'); ?>
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Telefone'); ?>
-		<?php echo $form->textField($model, 'Telefone', array('maxlength' => 20)); ?>
+		<?php echo $form->textField($model, 'Telefone', array(
+			'maxlength' => 20,
+			'pattern' => '\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$'
+			)); 
+		?>		
 		<?php echo $form->error($model,'Telefone'); ?>
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Login'); ?>
-		<?php echo $form->textField($model, 'Login', array('maxlength' => 150)); ?>
+		<?php echo $form->textField($model, 'Login', array('minlength' => 5, 'maxlength' => 150)); ?>
 		<?php echo $form->error($model,'Login'); ?>
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Senha'); ?>
-		<?php echo $form->textField($model, 'Senha', array('maxlength' => 100)); ?>
+		<?php echo $form->textField($model, 'Senha', array(
+			'minlength' => 6, 
+			'maxlength' => 50,
+			'pattern' => '(?:\\d+[a-z]|[a-z]+\\d)[a-z\\d]*',
+			)); 
+		?>
 		<?php echo $form->error($model,'Senha'); ?>
-		</div><!-- row -->
-				
-		<!--<label><?php //echo GxHtml::encode($model->getRelationLabel('tarefases')); ?></label>-->
-		<?php //echo $form->checkBoxList($model, 'tarefases', GxHtml::encodeEx(GxHtml::listDataEx(Tarefas::model()->findAllAttributes(null, true)), false, true)); ?>
+		</div><!-- row -->					
 
 <?php
-echo GxHtml::submitButton(Yii::t('app', 'Save'));
-$this->endWidget();
+	echo GxHtml::submitButton(Yii::t('app', 'Save'));
+	$this->endWidget();
 ?>
 </div><!-- form -->
+
+	<?php
+
+	Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/assets/jquery.mask.min.js');
+	Yii::app()->clientScript->registerScript('search', "
+	
+		$('#Usuarios_Telefone').mask('(00) 00000-0000');		
+	");
+
+	?>
+
+
+ 
+

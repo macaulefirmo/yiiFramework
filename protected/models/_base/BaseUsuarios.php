@@ -46,6 +46,8 @@ abstract class BaseUsuarios extends GxActiveRecord {
 			array('Nome, Login', 'length', 'max'=>150),
 			array('Sexo', 'length', 'max'=>9),
 			array('Email', 'length', 'max'=>250),
+			array('Email', 'email'),
+			array('Email, Login', 'unique'),
 			array('Telefone', 'length', 'max'=>20),
 			array('Senha', 'length', 'max'=>100),
 			array('Data_Criacao, Data_Modificacao', 'safe'),
