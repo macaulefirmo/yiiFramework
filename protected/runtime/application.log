@@ -6449,3 +6449,19 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/tarefinha/index.php?r=usuarios/userHome
 ---
+2018/07/09 14:03:49 [error] [php] Undefined variable: criteria2 (/opt/lampp/htdocs/tarefinha/protected/controllers/UsuariosController.php:171)
+Stack trace:
+#0 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(134): UsuariosController->runAction()
+#1 /opt/lampp/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /opt/lampp/htdocs/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#3 /opt/lampp/htdocs/yii/framework/web/filters/CInlineFilter.php(58): UsuariosController->filterAccessControl()
+#4 /opt/lampp/htdocs/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#5 /opt/lampp/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /opt/lampp/htdocs/yii/framework/web/CController.php(265): UsuariosController->runActionWithFilters()
+#7 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(282): UsuariosController->run()
+#8 /opt/lampp/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /opt/lampp/htdocs/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /opt/lampp/htdocs/tarefinha/index.php(13): CWebApplication->run()
+REQUEST_URI=/tarefinha/index.php?r=usuarios/perfil
+in /opt/lampp/htdocs/tarefinha/protected/controllers/UsuariosController.php (171)
+in /opt/lampp/htdocs/tarefinha/index.php (13)

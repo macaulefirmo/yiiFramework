@@ -166,16 +166,8 @@ class UsuariosController extends GxController {
 	}
 
 	public function actionPerfil() {
-				
-		$criteria2 = new CDbCriteria;
-		$criteria2->select = 'ID_Usuario';
-		$criteria2->condition = 'Login=:login';
-		$criteria2->params = array(':login' => Yii::app()->user->name);
-
-		$model = new Usuarios();
-		$usuario = $model->find($criteria2);
-
-		$model = $this->loadModel($usuario->ID_Usuario, 'Usuarios');		
+			
+		$model = $this->loadModel(Usuarios::getIdUser(), 'Usuarios');		
 
 		if (isset($_POST['Usuarios'])) {
 			

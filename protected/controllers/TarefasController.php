@@ -208,7 +208,7 @@ class TarefasController extends GxController {
 	public function actionUserTarefas() {
 
 		$model = new Tarefas();
-		$dataProvider = $model->getTarefasUser();
+		$dataProvider = $model->getTarefasUser(Usuarios::getIdUser());
 		$this->render('userTarefas', array(
 			'dataProvider' => $dataProvider,
 		));
@@ -217,7 +217,7 @@ class TarefasController extends GxController {
 	public function actionUserHome() {
 
 		$model = new Tarefas();
-		$dataProvider = $model->getTarefasPendentes();
+		$dataProvider = $model->getTarefasPendentes(Usuarios::getIdUser());
 		$this->render('userHome', array(
 			'dataProvider' => $dataProvider,
 		));		

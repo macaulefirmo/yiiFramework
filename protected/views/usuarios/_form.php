@@ -50,10 +50,13 @@
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Telefone'); ?>
-		<?php echo $form->textField($model, 'Telefone', array(
-			'maxlength' => 20,
-			'pattern' => '\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$'
-			)); 
+		<?php 
+		$this->widget('CMaskedTextField', array(
+			'model' => $model,
+			'attribute' => 'Telefone',
+			'mask' => '(99) ?99999-9999',
+			'htmlOptions' => array('size' => 20)
+			));
 		?>		
 		<?php echo $form->error($model,'Telefone'); ?>
 		</div><!-- row -->
@@ -79,15 +82,6 @@
 ?>
 </div><!-- form -->
 
-	<?php
-
-	Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/assets/jquery.mask.min.js');
-	Yii::app()->clientScript->registerScript('search', "
-	
-		$('#Usuarios_Telefone').mask('(00) 00000-0000');		
-	");
-
-	?>
 
 
  

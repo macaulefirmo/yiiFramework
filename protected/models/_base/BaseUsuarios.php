@@ -101,17 +101,5 @@ abstract class BaseUsuarios extends GxActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
-
-	public function getIdUser() {
-		
-		$criteria = new CDbCriteria;
-		$criteria->select = 'ID_Usuario';
-		$criteria->condition = 'Login=:login';
-		$criteria->params = array(':login' => Yii::app()->user->name);
-
-		$model = new Usuarios();
-		$usuario = $model->find($criteria);
-
-		return $usuario->ID_Usuario;
-	}
+	
 }
