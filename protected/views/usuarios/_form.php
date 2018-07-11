@@ -29,12 +29,17 @@
 		<?php $form->widget('zii.widgets.jui.CJuiDatePicker', array(
 			'model' => $model,
 			'attribute' => 'Data_Nascimento',
-			'value' => $model->Data_Nascimento,
+			'value' => $model->Data_Nascimento,			
 			'options' => array(
 				'showButtonPanel' => true,
 				'changeYear' => true,
-				'dateFormat' => 'yy-mm-dd',
+				'dateFormat'=>'dd/mm/yy', 
 				),
+			'htmlOptions'=>array(
+				'maxlength' => '10', 
+				'title' => 'dd/mm/aaaa',
+				'pattern' => '\d{1,2}/\d{1,2}/\d{4}',
+			),
 			));
 		; 
 		?>
@@ -45,6 +50,8 @@
 		<?php echo $form->textField($model, 'Email', array(
 			'maxlength' => 250,
 			'pattern' => '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+			'placeholder' => 'exemplo@email.com',
+			'title' => "Formato exigido: exemplo@email.com",
 			)); ?>
 		<?php echo $form->error($model,'Email'); ?>
 		</div><!-- row -->
@@ -67,10 +74,11 @@
 		</div><!-- row -->
 		<div class="row">
 		<?php echo $form->labelEx($model,'Senha'); ?>
-		<?php echo $form->textField($model, 'Senha', array(
+		<?php echo $form->passwordField($model, 'Senha', array(
 			'minlength' => 6, 
 			'maxlength' => 50,
 			'pattern' => '(?:\\d+[a-z]|[a-z]+\\d)[a-z\\d]*',
+			'title' => "A senha deve conter letras e números",			
 			)); 
 		?>
 		<?php echo $form->error($model,'Senha'); ?>

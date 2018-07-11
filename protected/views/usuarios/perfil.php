@@ -1,5 +1,5 @@
 
-<h1>Perfil</h1>
+<h2>Perfil</h2>
 
 <?php
     $this->renderPartial('_form', array(

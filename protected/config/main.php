@@ -8,6 +8,8 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Tarefinha',
+	'language'=>'pt_br',
+	// 'sourceLanguage'=>'pt_br',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -17,6 +19,12 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'ext.giix-components.*', // giix components
+		// Bootstrap
+		'ext.bootstrap.helpers.*',
+        'ext.bootstrap.behaviors.*',
+        'ext.bootstrap.components.*',
+        'ext.bootstrap.form.*',
+        'ext.bootstrap.widgets.*',
 	),
 
 	'modules'=>array(
@@ -26,6 +34,8 @@ return array(
 			'class' => 'system.gii.GiiModule',
 			'generatorPaths' => array(
 				'ext.giix-core', // giix generators
+				// Bootstrap
+				'ext.bootstrap.gii'
 			),
 			'password'=>'123456',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
@@ -40,6 +50,11 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		// Bootstrap
+		'bootstrap' => array(
+			'class' => 'ext.bootstrap.components.TbApi',   
+			'cdnUrl'=>"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/",
+        ),
 
 		// uncomment the following to enable URLs in path-format
 		/*

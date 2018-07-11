@@ -58,10 +58,7 @@ class TipoTarefaController extends GxController {
 
 			if (isset($_POST['TipoTarefa'])) {
 				
-				$model->setAttributes($_POST['TipoTarefa']);
-
-				$model->Data_Criacao = date("Y-m-d h:i:s");
-				$model->Data_Modificacao = date("Y-m-d h:i:s");			 									
+				$model->setAttributes($_POST['TipoTarefa']);									
 
 				if ($model->save()) {
 					if (Yii::app()->getRequest()->getIsAjaxRequest())
@@ -83,9 +80,7 @@ class TipoTarefaController extends GxController {
 		if(Yii::app()->user->name == 'admin') {
 		
 			$model = $this->loadModel($id, 'TipoTarefa');
-
-			$model->Data_Modificacao = date("Y-m-d h:i:s");
-
+			
 			if (isset($_POST['TipoTarefa'])) {
 				$model->setAttributes($_POST['TipoTarefa']);
 

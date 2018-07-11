@@ -79,9 +79,6 @@ class TarefasController extends GxController {
 					$model->idUsuario = null;
 				}
 
-				$model->Data_Criacao = date("Y-m-d h:i:s");
-				$model->Data_Modificacao = date("Y-m-d h:i:s");	
-
 				if ($model->save()) {
 					if (Yii::app()->getRequest()->getIsAjaxRequest())
 						Yii::app()->end();
@@ -130,7 +127,7 @@ class TarefasController extends GxController {
 
 		if($model->Status == "Concluida") {
 
-			$model->Data_Conclusao = date("Y-m-d h:i:s");
+			$model->Data_Conclusao = date("Y-m-d H:i:s");
 		} else {
 
 			$model->Data_Conclusao = null;
@@ -140,8 +137,6 @@ class TarefasController extends GxController {
 
 			$model->idUsuario = null;
 		} 
-
-		$model->Data_Modificacao = date("Y-m-d h:i:s");
 
 		return $model;
 	}
@@ -198,28 +193,55 @@ class TarefasController extends GxController {
 
 	public function actionTarefasPublicas() {
 		
+		$this->layout = '//layouts/column1';
+
 		$model = new Tarefas();
-		$dataProvider = $model->getTarefasPublicas();
+
+		$model->unsetAttributes();
+
+		if (isset($_GET['Tarefas']))
+			$model->setAttributes($_GET['Tarefas']);
+
+		// $dataProvider = $model->getTarefasPublicas();
 		$this->render('tarefasPublicas', array(
-			'dataProvider' => $dataProvider,
+			// 'dataProvider' => $dataProvider,
+			'dataProvider' => $model,
 		));
 	}
 
 	public function actionUserTarefas() {
 
+		$this->layout = '//layouts/column1';
+
 		$model = new Tarefas();
-		$dataProvider = $model->getTarefasUser(Usuarios::getIdUser());
+
+		$model->unsetAttributes();
+
+		if (isset($_GET['Tarefas']))
+			$model->setAttributes($_GET['Tarefas']);
+
+		// $dataProvider = $model->getTarefasUser(Usuarios::getIdUser());
 		$this->render('userTarefas', array(
-			'dataProvider' => $dataProvider,
+			// 'dataProvider' => $dataProvider,
+			'dataProvider' => $model,
 		));
 	}
 
 	public function actionUserHome() {
 
-		$model = new Tarefas();
-		$dataProvider = $model->getTarefasPendentes(Usuarios::getIdUser());
+		$this->layout = '//layouts/column1';
+
+		$model = new Tarefas('search');	
+
+		$model->unsetAttributes();
+
+		if (isset($_GET['Tarefas']))
+			$model->setAttributes($_GET['Tarefas']);
+
+		// $dataProvider = $model->getTarefasPendentes(Usuarios::getIdUser());
 		$this->render('userHome', array(
-			'dataProvider' => $dataProvider,
+			// 'dataProvider' => $dataProvider,
+			'dataProvider' => $model,
 		));		
 	}
 

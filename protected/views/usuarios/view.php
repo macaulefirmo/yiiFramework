@@ -19,16 +19,16 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
 	'attributes' => array(
-'ID_Usuario',
-'Nome',
-'Sexo',
-'Data_Nascimento',
-'Email',
-'Telefone',
-'Login',
-'Senha',
-'Data_Criacao',
-'Data_Modificacao',
+	'ID_Usuario',
+	'Nome',
+	'Sexo',
+	'Data_Nascimento',
+	'Email',
+	'Telefone',
+	'Login',
+	// 'Senha',
+	'Data_Criacao',
+	'Data_Modificacao',
 	),
 )); ?>
 

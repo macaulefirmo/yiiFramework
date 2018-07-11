@@ -14,8 +14,12 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/teste.css">
+	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<?php Yii::app()->bootstrap->register(); ?>
+
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/teste.css">
+	
 </head>
 
 <body>
@@ -34,12 +38,12 @@
 
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					array('label'=>'Home', 'url'=>array('/site/index')),
+					array('label'=>'Início', 'url'=>array('/site/index')),
 					array('label'=>'Usuarios', 'url'=>array('/usuarios/index'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Tarefas', 'url'=>array('/tarefas/index'), 'visible'=>!Yii::app()->user->isGuest),
-					array('label'=>'Tipos de Tarefas', 'url'=>array('/tipoTarefa/index'), 'visible'=>!Yii::app()->user->isGuest),
-					array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-					array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+					array('label'=>'Tipos de Tarefa', 'url'=>array('/tipoTarefa/index'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Entrar', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+					array('label'=>'Sair ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 				),
 			)); 
 			
@@ -50,13 +54,13 @@
 
 			$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
-					array('label'=>'Home', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->isGuest),
-					array('label'=>'Home', 'url'=>array('/tarefas/userHome'), 'visible'=>!Yii::app()->user->isGuest),
+					array('label'=>'Início', 'url'=>array('/site/index'), 'visible'=>Yii::app()->user->isGuest),
+					array('label'=>'Início', 'url'=>array('/tarefas/userHome'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Perfil', 'url'=>array('/usuarios/perfil'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Minhas Tarefas', 'url'=>array('/tarefas/userTarefas'), 'visible'=>!Yii::app()->user->isGuest),
 					array('label'=>'Tarefas Públicas', 'url'=>array('/tarefas/tarefasPublicas'), 'visible'=>!Yii::app()->user->isGuest),
-					array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-					array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+					array('label'=>'Entrar', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+					array('label'=>'Sair ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 				),
 			)); 
 			
@@ -77,12 +81,13 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> por Tarefinha Inc.<br/>
+		Todos os Direitos Reservados.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
 </div><!-- page -->
+
 		
 </body>
 </html>

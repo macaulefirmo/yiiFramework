@@ -70,9 +70,6 @@ class UsuariosController extends GxController {
 			if(isset($_POST['Usuarios'])) {
 				$model->setAttributes($_POST['Usuarios']);
 
-				$model->Data_Criacao = date("Y-m-d h:i:s");
-				$model->Data_Modificacao = date("Y-m-d h:i:s");
-
 				if ($model->save()) {
 					if (Yii::app()->getRequest()->getIsAjaxRequest())
 						Yii::app()->end();
@@ -91,8 +88,6 @@ class UsuariosController extends GxController {
 	public function actionUpdate($id) {
 		
 		$model = $this->loadModel($id, 'Usuarios');
-
-		$model->Data_Modificacao = date("Y-m-d h:i:s");
 
 		if (isset($_POST['Usuarios'])) {
 			$model->setAttributes($_POST['Usuarios']);
@@ -165,15 +160,13 @@ class UsuariosController extends GxController {
 		}
 	}
 
-	public function actionPerfil() {
-			
+	public function actionPerfil() {	
+
 		$model = $this->loadModel(Usuarios::getIdUser(), 'Usuarios');		
 
 		if (isset($_POST['Usuarios'])) {
 			
 			$model->setAttributes($_POST['Usuarios']);
-
-			$model->Data_Modificacao = date("Y-m-d h:i:s");
 
 			if ($model->save()) {
 				
